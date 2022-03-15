@@ -1,8 +1,6 @@
 /*
- * Copyright (C) 2022 ZephyrWoD
- * Copyright (C) 2011-2022 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2022 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2022 MaNGOS <http://getmangos.com/>
+ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -18,8 +16,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SF_AUTHCODES_H
-#define SF_AUTHCODES_H
+#ifndef _AUTHCODES_H
+#define _AUTHCODES_H
 
 enum AuthResult
 {
@@ -67,30 +65,11 @@ enum LoginResult
     LOGIN_LOCKED_ENFORCED                        = 0x10
 };
 
-#define JADECORE_ACCEPTED_CLIENT_BUILD        {20779, 17399, 17371, 16135, 12340, 0}  // accept one Warlords of Draenor, one Mists of Pandaria, one Cataclysm and one Wrath of the Lich King build
-
-enum ExpansionFlags
-{
-    POST_BC_EXP_FLAG                            = 0x2,
-    PRE_BC_EXP_FLAG                             = 0x1,
-    NO_VALID_EXP_FLAG                           = 0x0
-};
-
-struct RealmBuildInfo
-{
-    int Build;
-    int MajorVersion;
-    int MinorVersion;
-    int BugfixVersion;
-    int HotfixVersion;
-};
+#define JADECORE_ACCEPTED_CLIENT_BUILD        {17399, 17371, 16135, 12340, 0}  // accept one Mists of Pandaria, one Cataclysm and one Wrath of the Lich King build
 
 namespace AuthHelper
 {
-    RealmBuildInfo const* GetBuildInfo(int build);
     bool IsAcceptedClientBuild(int build);
-    bool IsPostBCAcceptedClientBuild(int build);
-    bool IsPreBCAcceptedClientBuild(int build);
 };
 
 #endif
