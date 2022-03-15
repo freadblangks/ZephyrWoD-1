@@ -17,7 +17,7 @@ enum AccountOpResult
     AOR_OK,
     AOR_NAME_TOO_LONG,
     AOR_PASS_TOO_LONG,
-    AOR_NAME_ALREDY_EXIST,
+    AOR_NAME_ALREADY_EXIST,
     AOR_NAME_NOT_EXIST,
     AOR_DB_INTERNAL_ERROR
 };
@@ -28,7 +28,7 @@ enum AccountOpResult
 namespace AccountMgr
 {
 #ifndef CROSS
-    AccountOpResult CreateAccount(std::string username, std::string password);
+    AccountOpResult CreateAccount(std::string username, std::string password, std::string email = "", uint32 bnetAccountId = 0, uint8 bnetIndex = 0);
     AccountOpResult DeleteAccount(uint32 accountId);
     AccountOpResult ChangeUsername(uint32 accountId, std::string newUsername, std::string newPassword);
     AccountOpResult ChangePassword(uint32 accountId, std::string newPassword);

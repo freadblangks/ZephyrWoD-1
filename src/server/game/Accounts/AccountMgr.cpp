@@ -66,43 +66,30 @@ namespace AccountMgr
     }
 
 #ifndef CROSS
-    AccountOpResult CreateAccount(std::string username, std::string password)
+    AccountOpResult AccountMgr::CreateAccount(std::string username, std::string password, std::string email /*= ""*/, uint32 bnetAccountId /*= 0*/, uint8 bnetIndex /*= 0*/)
     {
         if (utf8length(username) > MAX_ACCOUNT_STR)
-            return AOR_NAME_TOO_LONG;                           // Username's too long
-
-        if (utf8length(password) > MAX_PASSWORD_LENGTH)
-            return AOR_PASS_TOO_LONG;
+            return AccountOpResult::AOR_NAME_TOO_LONG;                           // username's too long
 
         normalizeString(username);
         normalizeString(password);
+        normalizeString(email);
 
         if (GetId(username))
-            return AOR_NAME_ALREDY_EXIST;                       // Username does already exist
-
-        // SRP6aCalculatePasswordVerifier requires a lowercase email
-        normalizeString(username, false);
-
-        std::string salt = SRP6aGenerateSalt32();
-        std::string passwordVerifier = SRP6aCalculatePasswordVerifier(username, password, salt);
-
-        // everything else requires an uppercase email
-        normalizeString(username, true);
+            return AccountOpResult::AOR_NAME_ALREADY_EXIST;                       // username does already exist
 
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_ACCOUNT);
 
         stmt->setString(0, username);
         stmt->setString(1, CalculateShaPassHash(username, password));
-        stmt->setString(2, passwordVerifier);
-        stmt->setString(3, salt);
+        stmt->setString(2, email);
 
-        LoginDatabase.Execute(stmt);
+        LoginDatabase.DirectExecute(stmt); // Enforce saving, otherwise AddGroup can fail
 
         stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_REALM_CHARACTERS_INIT);
-
         LoginDatabase.Execute(stmt);
 
-        return AOR_OK;                                          // Everything's fine
+        return AccountOpResult::AOR_OK;                                          // everything's fine
     }
 
     AccountOpResult DeleteAccount(uint32 accountId)
