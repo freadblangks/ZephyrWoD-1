@@ -9,9 +9,6 @@ Links where i got this from:
 - WoWOriginProjects https://github.com/WoWOriginProjects/WOPCore-6.2.3-FirestormWOD
 - Undergarun https://github.com/Undergarun/FirestormWoD
 
-Mirror with commit history:
-https://github.com/fluxurion/w6x-FirestormWoD
-
 Important updates:
 - updated g3dlite, cryptography, ace ..
 - updated cmake stuffs like macros, settings ..
