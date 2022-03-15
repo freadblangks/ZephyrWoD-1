@@ -7,7 +7,6 @@
  \edited  2011-08-20
 */
 
-#ifndef __clang_analyzer__
 #include "G3D/platform.h"
 #include "G3D/stringutils.h"
 #include "G3D/BinaryInput.h"
@@ -313,5 +312,4 @@ std::string trimWhitespace(const std::string& s) {
 #undef NEWLINE
 #ifdef _MSC_VER
 #   pragma warning (pop)
-#endif
 #endif

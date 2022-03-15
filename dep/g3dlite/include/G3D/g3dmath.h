@@ -24,7 +24,7 @@
 #   pragma warning (disable : 4530)
 #endif
 
-#include "G3D/platform.h"
+#include "../../../../dep/g3dlite/include/G3D/platform.h"
 #include <ctype.h>
 #include <float.h>
 #include <limits>
@@ -54,7 +54,7 @@
 
 #include <math.h>
 
-#include "G3D/debug.h"
+#include "../../../../dep/g3dlite/include/G3D/debug.h"
 
 #undef min
 #undef max
@@ -934,7 +934,7 @@ inline double signedPow(double b, double e) {
 
 namespace std {
 inline int pow(int a, int b) {
-    return (int)pow(double(a), double(b));
+    return (int)::pow(double(a), double(b));
 }
 
 }

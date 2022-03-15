@@ -9,7 +9,6 @@
  \edited  2012-07-22
  */
 
-#ifndef __clang_analyzer__
 #include "G3D/fileutils.h"
 #include "G3D/TextInput.h"
 #include "G3D/BinaryInput.h"
@@ -1344,5 +1343,4 @@ void deserialize(float& b, TextInput& ti) {
 
 #ifdef _MSC_VER
 #   pragma warning (pop)
-#endif
 #endif

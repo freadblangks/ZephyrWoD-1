@@ -1,9 +1,13 @@
+# Copyright (C) 2011-2017 Project SkyFire <http://www.projectskyfire.org/
+# Copyright (C) 2008-2017 TrinityCore <http://www.trinitycore.org/>
 #
-#  MILLENIUM-STUDIO
-#  Copyright 2016 Millenium-studio SARL
-#  All Rights Reserved.
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without
+# modifications, as long as this notice is preserved.
 #
-
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 set(g3dlib_STAT_SRCS
   source/AABox.cpp
@@ -66,7 +70,4 @@ add_library(g3dlib STATIC ${g3dlib_STAT_SRCS})
 
 target_link_libraries(g3dlib
   ${ZLIB_LIBRARIES}
-  ${CMAKE_THREAD_LIBS_INIT}
 )
-
-set_property(TARGET g3dlib PROPERTY FOLDER "dep")

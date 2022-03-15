@@ -17,32 +17,29 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _AUTH_HMAC_H
-#define _AUTH_HMAC_H
+// THIS FILE IS DEPRECATED
+
+#ifndef TRINITY_SYSTEMCONFIG_H
+#define TRINITY_SYSTEMCONFIG_H
 
 #include "Define.h"
-#include <string>
-#include <openssl/hmac.h>
-#include <openssl/sha.h>
+#include "revision.h"
 
-class BigNumber;
+#define _PACKAGENAME "Zephyr WoD"
 
-#define SEED_KEY_SIZE 16
-
-class HmacHash
-{
-    public:
-        HmacHash(uint32 len, uint8 *seed);
-        ~HmacHash();
-        void UpdateData(const std::string &str);
-        void UpdateData(const uint8* data, size_t len);
-        void Finalize();
-        uint8 *ComputeHash(BigNumber* bn);
-        uint8 *GetDigest() { return (uint8*)m_digest; }
-        int GetLength() const { return SHA_DIGEST_LENGTH; }
-    private:
-        HMAC_CTX* m_ctx;
-        uint8 m_digest[SHA_DIGEST_LENGTH];
-};
+#if TRINITY_ENDIAN == TRINITY_BIGENDIAN
+# define _ENDIAN_STRING "big-endian"
+#else
+# define _ENDIAN_STRING "little-endian"
 #endif
 
+#if PLATFORM == PLATFORM_WINDOWS
+# ifdef _WIN64
+#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Win64, " _ENDIAN_STRING ")"
+# else
+#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Win32, " _ENDIAN_STRING ")"
+# endif
+#else
+#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Unix, " _ENDIAN_STRING ")"
+#endif
+#endif
